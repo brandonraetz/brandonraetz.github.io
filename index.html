@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brandon Raetz — Mechanical Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0e0f11;--surface:#16181c;--surface2:#1e2026;--border:#2a2d35;--text:#e8e9ec;--muted:#7a7f8e;--accent:#c8f563;--accent2:#4af0b0;--accent3:#f5a623;--red:#ff6b6b}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2.5rem;display:flex;align-items:center;justify-content:space-between;background:rgba(14,15,17,0.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'DM Mono',monospace;font-size:13px;color:var(--accent);letter-spacing:.08em}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{color:var(--muted);font-size:13px;text-decoration:none;letter-spacing:.04em;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:6rem 2.5rem 4rem;position:relative;overflow:hidden}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:.35}
+.hero-glow{position:absolute;top:-200px;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(200,245,99,.07) 0%,transparent 70%);pointer-events:none}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:12px;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem;position:relative}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(3.5rem,8vw,7rem);line-height:1.0;font-weight:400;margin-bottom:1.5rem;position:relative}
+.hero h1 em{color:var(--accent);font-style:italic}
+.hero-sub{font-size:1.1rem;color:var(--muted);max-width:520px;margin-bottom:2.5rem;font-weight:300;position:relative}
+.hero-links{display:flex;gap:1rem;flex-wrap:wrap;position:relative}
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.4rem;font-size:14px;font-family:'Outfit',sans-serif;font-weight:500;border-radius:3px;text-decoration:none;transition:all .2s;letter-spacing:.02em}
+.btn-primary{background:var(--accent);color:#0e0f11;border:none;cursor:pointer}
+.btn-primary:hover{background:#d4f77a;transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.hero-scroll{display:flex;align-items:center;gap:.6rem;color:var(--muted);font-size:12px;font-family:'DM Mono',monospace;letter-spacing:.08em;margin-top:4rem;position:relative}
+.scroll-line{width:40px;height:1px;background:var(--muted)}
+section{padding:5rem 2.5rem}
+.section-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.18em;text-transform:uppercase;margin-bottom:1rem}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:400;margin-bottom:3rem;line-height:1.1}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;max-width:900px}
+@media(max-width:700px){.about-grid{grid-template-columns:1fr}}
+.about-text p{color:var(--muted);font-weight:300;line-height:1.8;margin-bottom:1rem}
+.about-text p strong{color:var(--text);font-weight:500}
+.skills-list{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+.skill-tag{font-family:'DM Mono',monospace;font-size:11px;padding:.3rem .7rem;background:var(--surface2);border:1px solid var(--border);border-radius:2px;color:var(--muted);letter-spacing:.04em}
+.skill-tag.hot{border-color:rgba(200,245,99,.3);color:var(--accent);background:rgba(200,245,99,.05)}
+.stat-grid{display:grid;gap:1.5rem}
+.stat{border-left:2px solid var(--accent);padding-left:1rem}
+.stat-num{font-family:'DM Serif Display',serif;font-size:2.2rem;color:var(--accent);line-height:1}
+.stat-label{font-size:13px;color:var(--muted);margin-top:.2rem}
+.exp-list{display:flex;flex-direction:column;max-width:800px}
+.exp-item{display:grid;grid-template-columns:200px 1fr;gap:2rem;padding:2rem 0;border-bottom:1px solid var(--border)}
+.exp-item:first-child{border-top:1px solid var(--border)}
+@media(max-width:600px){.exp-item{grid-template-columns:1fr}}
+.exp-period{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.08em}
+.exp-company{font-size:13px;color:var(--muted);margin-top:.3rem}
+.exp-role{font-size:1.05rem;font-weight:500;margin-bottom:.75rem}
+.exp-desc{color:var(--muted);font-size:14px;line-height:1.7;font-weight:300}
+
+/* CARDS */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1px;background:var(--border)}
+.project-card{background:var(--bg);transition:background .25s;position:relative;overflow:hidden;display:flex;flex-direction:column;cursor:pointer}
+.project-card:hover{background:var(--surface)}
+.project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);transform:scaleX(0);transition:transform .3s;transform-origin:left;z-index:2}
+.project-card:hover::before{transform:scaleX(1)}
+.project-img{width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;background:var(--surface2)}
+.project-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;display:block}
+.project-card:hover .project-img img{transform:scale(1.04)}
+.project-img-gallery{display:grid;grid-template-columns:1fr 1fr;gap:1px;width:100%;aspect-ratio:16/9;background:var(--border)}
+.project-img-gallery img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.project-card:hover .project-img-gallery img{transform:scale(1.04)}
+.img-placeholder{width:100%;aspect-ratio:16/9;background:var(--surface2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem}
+.img-placeholder span{font-family:'DM Mono',monospace;font-size:11px;color:var(--border);letter-spacing:.1em;text-align:center;padding:0 1rem}
+.img-placeholder .icon{font-size:2rem;opacity:.3}
+.project-body{padding:1.75rem;flex:1;display:flex;flex-direction:column}
+.project-tag{font-family:'DM Mono',monospace;font-size:10px;padding:.25rem .6rem;border-radius:2px;display:inline-block;margin-bottom:.85rem;letter-spacing:.06em;text-transform:uppercase}
+.tag-medical{background:rgba(74,240,176,.1);color:#4af0b0;border:1px solid rgba(74,240,176,.2)}
+.tag-defense{background:rgba(245,166,35,.1);color:#f5a623;border:1px solid rgba(245,166,35,.2)}
+.tag-consumer{background:rgba(200,245,99,.1);color:#c8f563;border:1px solid rgba(200,245,99,.2)}
+.tag-robotics{background:rgba(255,107,107,.1);color:#ff6b6b;border:1px solid rgba(255,107,107,.2)}
+.tag-personal{background:rgba(150,120,255,.1);color:#a78bfa;border:1px solid rgba(150,120,255,.2)}
+.project-num{font-family:'DM Mono',monospace;font-size:10px;color:var(--border);position:absolute;top:1.25rem;right:1.25rem;letter-spacing:.1em;z-index:3}
+.project-title{font-family:'DM Serif Display',serif;font-size:1.3rem;font-weight:400;margin-bottom:.35rem;line-height:1.2}
+.project-role{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:.85rem;letter-spacing:.04em}
+.project-desc{color:var(--muted);font-size:13px;line-height:1.65;font-weight:300;margin-bottom:1rem}
+.project-outcomes{list-style:none;display:flex;flex-direction:column;gap:.3rem;margin-bottom:1.2rem}
+.project-outcomes li{font-size:12.5px;color:var(--muted);display:flex;gap:.45rem;align-items:flex-start;line-height:1.5}
+.project-outcomes li::before{content:'→';color:var(--accent);flex-shrink:0;font-family:'DM Mono',monospace;font-size:11px;margin-top:2px}
+.project-footer{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:auto;padding-top:1rem;border-top:1px solid var(--border)}
+.tech-tag{font-size:11px;font-family:'DM Mono',monospace;color:var(--muted);background:var(--surface2);padding:.2rem .55rem;border-radius:2px}
+.expand-hint{font-family:'DM Mono',monospace;font-size:10px;color:var(--border);letter-spacing:.08em;margin-top:.75rem;transition:color .2s}
+.project-card:hover .expand-hint{color:var(--accent)}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:500;display:none;align-items:center;justify-content:center;padding:1.5rem;backdrop-filter:blur(4px)}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--surface);border:1px solid var(--border);border-radius:4px;width:100%;max-width:1100px;max-height:92vh;display:grid;grid-template-columns:1fr 420px;overflow:hidden;position:relative;animation:modalIn .2s ease}
+@keyframes modalIn{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+@media(max-width:800px){.modal-box{grid-template-columns:1fr;grid-template-rows:auto 1fr;max-height:95vh;overflow-y:auto}}
+.modal-close{position:absolute;top:1rem;right:1rem;z-index:10;background:var(--surface2);border:1px solid var(--border);color:var(--muted);width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;line-height:1}
+.modal-close:hover{border-color:var(--accent);color:var(--accent)}
+.modal-left{background:var(--bg);position:relative;overflow:hidden;min-height:340px}
+.modal-gallery{width:100%;height:100%;position:relative}
+.modal-slide{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:var(--bg)}
+.modal-slide.active{display:flex}
+.modal-slide img{width:100%;height:100%;object-fit:contain;max-height:70vh}
+.modal-slide video{width:100%;height:100%;object-fit:contain;max-height:70vh;background:#000}
+.slide-caption{position:absolute;left:0;right:0;bottom:0;padding:.5rem 1rem;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--text);background:linear-gradient(transparent,rgba(14,15,17,.85));text-align:center}
+.modal-prev,.modal-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(14,15,17,.7);border:1px solid var(--border);color:var(--text);width:36px;height:36px;border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5;transition:all .2s;line-height:1}
+.modal-prev{left:.75rem}
+.modal-next{right:.75rem}
+.modal-prev:hover,.modal-next:hover{border-color:var(--accent);color:var(--accent)}
+.modal-dots{position:absolute;bottom:.75rem;left:50%;transform:translateX(-50%);display:flex;gap:.4rem;z-index:5}
+.modal-dot{width:7px;height:7px;border-radius:50%;background:var(--border);border:none;cursor:pointer;transition:all .2s;padding:0}
+.modal-dot.active{background:var(--accent);transform:scale(1.2)}
+.modal-no-img{width:100%;height:100%;min-height:300px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.08em}
+.modal-right{padding:2.5rem 2rem 2rem;overflow-y:auto;display:flex;flex-direction:column;gap:.75rem}
+.modal-title{font-family:'DM Serif Display',serif;font-size:1.6rem;font-weight:400;line-height:1.2}
+.modal-role{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.04em}
+.modal-desc{color:var(--muted);font-size:14px;line-height:1.75;font-weight:300}
+.modal-right .project-outcomes{margin-bottom:0}
+.modal-right .project-outcomes li{font-size:13.5px}
+.modal-right .project-footer{margin-top:auto;padding-top:1.25rem}
+
+/* CONTACT */
+.contact-inner{max-width:600px}
+.contact-inner p{color:var(--muted);font-size:1.05rem;line-height:1.8;font-weight:300;margin-bottom:2rem}
+.contact-links{display:flex;flex-wrap:wrap;gap:1rem}
+.contact-link{display:flex;align-items:center;gap:.5rem;color:var(--text);font-size:14px;font-family:'DM Mono',monospace;text-decoration:none;padding:.75rem 1.25rem;border:1px solid var(--border);transition:all .2s}
+.contact-link:hover{border-color:var(--accent);color:var(--accent)}
+.contact-link span{font-size:11px;color:var(--muted)}
+footer{padding:2rem 2.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+footer p{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.06em}
+body.modal-open{overflow:hidden}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">BR / PORTFOLIO</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-eyebrow">Product Development Engineer · Auburn, AL</div>
+  <h1>Brandon<br>Raetz<em>.</em></h1>
+  <p class="hero-sub">Product Development Engineer specializing in parametric design, medical device engineering, and rapid prototyping for real-world deployment.</p>
+  <div class="hero-links">
+    <a class="btn btn-primary" href="#projects">View Projects</a>
+    <a class="btn btn-outline" href="#contact">Get In Touch</a>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div>scroll to explore</div>
+</section>
+
+<section id="about">
+  <div class="section-label">01 / About</div>
+  <div class="section-title">Engineer. Builder.<br>Founder.</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a mechanical engineer with a BS from <strong>Auburn University's Samuel Ginn College of Engineering</strong> and a minor in Business, graduating with a 3.52 GPA.</p>
+      <p>Currently serving as <strong>Product Development Engineer at XO Armor Technologies</strong>, working directly with clinicians to design 3D-printed orthotic systems deployed at the point of care — including test rig design, materials validation, customer support, and intern management.</p>
+      <p>I also founded <strong>Easy Prints LLC</strong>, an e-commerce venture turning 3D scan data into personalized consumer products. I believe the best engineers understand not just how to build things, but how to get them into people's hands.</p>
+      <div class="skills-list">
+        <span class="skill-tag hot">SolidWorks</span><span class="skill-tag hot">3D Printing / FDM</span><span class="skill-tag hot">Blender</span><span class="skill-tag hot">Parametric CAD</span><span class="skill-tag">FreeCAD</span><span class="skill-tag">MATLAB</span><span class="skill-tag">Python</span><span class="skill-tag">G-Code</span><span class="skill-tag">Bambu Studio</span><span class="skill-tag">SolidWorks FEA</span><span class="skill-tag">SolidWorks Motion</span><span class="skill-tag">Capital Logic</span><span class="skill-tag">Jira</span>
+      </div>
+    </div>
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-num">10,000+</div><div class="stat-label">Unique STL files generated via parametric workflows</div></div>
+      <div class="stat"><div class="stat-num">50+</div><div class="stat-label">Collegiate & professional teams using my helmet design</div></div>
+      <div class="stat"><div class="stat-num">2× SBIR</div><div class="stat-label">Phase I & II military grant contributions</div></div>
+      <div class="stat"><div class="stat-num">5+ Materials</div><div class="stat-label">FDM materials validated: PLA, PETG, TPU, PCL, foaming TPU</div></div>
+      <div class="stat"><div class="stat-num">Ford + Boeing</div><div class="stat-label">Industry experience before graduating</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience" style="background:var(--surface)">
+  <div class="section-label">02 / Experience</div>
+  <div class="section-title">Where I've<br>Worked.</div>
+  <div class="exp-list">
+    <div class="exp-item">
+      <div><div class="exp-period">Jul 2025 — Present</div><div class="exp-company">XO Armor Technologies Inc.</div></div>
+      <div><div class="exp-role">Product Development Engineer</div><div class="exp-desc">Broader engineering role working directly with clinicians on medical device design from requirements through validation. Covers test rig design, FDM materials testing, orthotic tool development, click-to-print catalog, design history documentation, test protocols, customer support, and managing a summer engineering intern.</div></div>
+    </div>
+    <div class="exp-item">
+      <div><div class="exp-period">May 2024 — Jul 2025</div><div class="exp-company">XO Armor Technologies Inc.</div></div>
+      <div><div class="exp-role">CAD Engineering Lead</div><div class="exp-desc">Parametric CAD-focused role delivering SBIR grant work at scale. Generated 10,000+ unique STL files via automated parametric workflows, designed the football helmet ear hole cover (adopted by 50+ teams), and supported Phase I &amp; II SBIR grant work including ML training data and reverse engineering workflows.</div></div>
+    </div>
+    <div class="exp-item">
+      <div><div class="exp-period">Aug 2025 — Present</div><div class="exp-company">Easy Prints LLC</div></div>
+      <div><div class="exp-role">Founder</div><div class="exp-desc">Founded and operate an e-commerce business producing personalized 3D-printed consumer products. Managing product development, brand identity, early customer feedback loops, and operational infrastructure for e-commerce launch.</div></div>
+    </div>
+    <div class="exp-item">
+      <div><div class="exp-period">Oct 2022 — Apr 2024</div><div class="exp-company">Auburn University / Boeing</div></div>
+      <div><div class="exp-role">Product Definition Team Member</div><div class="exp-desc">Executed contracted engineering work performing electrical diagram auditing and conversion in Capital Logic for Boeing, maintaining high accuracy under strict project timelines.</div></div>
+    </div>
+    <div class="exp-item">
+      <div><div class="exp-period">May 2023 — Aug 2023</div><div class="exp-company">Ford Motor Company</div></div>
+      <div><div class="exp-role">Manufacturing & Quality Intern</div><div class="exp-desc">Analyzed warranty and production data across Ford vehicle production centers to identify manufacturing defects and drive process improvements. Presented findings to engineering leadership.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-label">03 / Projects</div>
+  <div class="section-title">Selected<br>Work.</div>
+  <div class="projects-grid">
+
+    <div class="project-card" onclick="openModal('orthotic')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openModal('orthotic')">
+      <div class="project-num">01</div>
+      <div class="project-img-gallery">
+        <img src="images/orthotic-1.jpg" alt="Custom dual-material foot orthotic — printed shell with foam liner" loading="lazy">
+        <img src="images/orthotic-2.jpg" alt="Parametric insole catalog — range of sizes and arch profiles" loading="lazy">
+      </div>
+      <div class="project-body">
+        <div class="project-tag tag-medical">Medical Device</div>
+        <h3 class="project-title">Custom Foot Orthotic Design Tool</h3>
+        <div class="project-role">Product Development Engineer · XO Armor Technologies</div>
+        <p class="project-desc">Built the full orthotic development pipeline from the ground up — from a parametric catalog of 500+ premade insoles to a custom scan-driven dual-material orthotic refined through 200+ clinical iterations.</p>
+        <ul class="project-outcomes"><li>Parametric insole catalog: 500+ variations across rigid &amp; foam, W4–M18, low–high arch, varying heel cup depths</li><li>Custom orthotic pipeline developed directly with a clinician through continuous iteration</li><li>Dual-material design: rigid shell with integrated foam liner, FDM-optimized for point-of-care production</li><li>200+ orthotics produced in clinical development — patient &amp; clinician feedback overwhelmingly positive</li><li>Built a Blender Python add-on to accelerate design iteration and create validated proof-of-concept workflows handed off to software teams for integration into proprietary software</li><li>Authored design history documentation and test protocols for V&amp;V activities</li></ul>
+        <div class="project-footer"><span class="tech-tag">SolidWorks</span><span class="tech-tag">FDM / TPU + Foam</span><span class="tech-tag">Parametric CAD</span><span class="tech-tag">Dual-Material FDM</span><span class="tech-tag">Python / Blender</span><span class="tech-tag">Clinical V&amp;V</span></div>
+        <div class="expand-hint">click to expand ↗</div>
+      </div>
+    </div>
+    <div class="project-card" onclick="openModal('sbir')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openModal('sbir')">
+      <div class="project-num">02</div>
+      <div class="project-img">
+        <img src="images/sbir-tourniquet.jpg" alt="Fully FDM-printed tourniquet — zero hardware components" loading="lazy">
+      </div>
+      <div class="project-body">
+        <div class="project-tag tag-defense">Defense / SBIR</div>
+        <h3 class="project-title">Phase II SBIR Military Device Library</h3>
+        <div class="project-role">CAD Engineering Lead · XO Armor Technologies</div>
+        <p class="project-desc">Generated a library of 10,000+ unique parametric STL files for a Phase II military logistics SBIR grant — enabling rapid point-of-care production of hardware, medical, protective, and tactical devices. Highlights include a fully FDM-printed tourniquet with zero hardware components.</p>
+        <ul class="project-outcomes"><li>10,000+ unique STL files generated programmatically via parametric CAD</li><li>Fully FDM-printed tourniquet — zero hardware, all functional geometry</li><li>Incorporated dimensional tolerancing for fit across variable manufacturing conditions</li><li>Covered hardware, medical, protective, and tactical device categories</li></ul>
+        <div class="project-footer"><span class="tech-tag">SolidWorks</span><span class="tech-tag">Python</span><span class="tech-tag">Parametric CAD</span><span class="tech-tag">FDM</span></div>
+        <div class="expand-hint">click to expand ↗</div>
+      </div>
+    </div>
+    <div class="project-card" onclick="openModal('helmet')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openModal('helmet')">
+      <div class="project-num">03</div>
+      <div class="project-img-gallery">
+        <img src="images/helmet-players.jpg" alt="College and NFL players wearing the helmet ear hole cover" loading="lazy">
+        <img src="images/helmet-titans.jpg" alt="Ear hole covers on Tennessee Titans helmet during sales demo" loading="lazy">
+      </div>
+      <div class="project-body">
+        <div class="project-tag tag-consumer">Consumer Product</div>
+        <h3 class="project-title">Football Helmet Ear Hole Cover</h3>
+        <div class="project-role">CAD Engineering Lead · XO Armor Technologies</div>
+        <p class="project-desc">Designed a retrofit helmet accessory improving Coach-to-Player (C2P) communication — taken from concept to widespread adoption across NFL and collegiate programs.</p>
+        <ul class="project-outcomes"><li>Adopted by 50+ collegiate and professional football teams including NFL clients</li><li>Generated 100+ inbound sales leads organically</li><li>Iterated design for fit compatibility across helmet manufacturers</li></ul>
+        <div class="project-footer"><span class="tech-tag">SolidWorks</span><span class="tech-tag">3D Printing</span><span class="tech-tag">Product Design</span></div>
+        <div class="expand-hint">click to expand ↗</div>
+      </div>
+    </div>
+    
+    <div class="project-card" onclick="openModal('easyprintss')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openModal('easyprintss')">
+      <div class="project-num">04</div>
+      <div class="project-img" style="aspect-ratio:unset">
+        <img src="images/tee-field.jpg" alt="Custom head golf tee in the field with Callaway ball" loading="lazy" style="width:100%;height:200px;object-fit:cover;display:block">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)">
+          <img src="images/tee-prototypes.jpg" alt="Multiple prototype iterations across materials" loading="lazy" style="width:100%;height:130px;object-fit:cover">
+          <img src="images/tee-printing.jpg" alt="Tee mid-print on Bambu Lab printer" loading="lazy" style="width:100%;height:130px;object-fit:cover">
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-tag tag-consumer">Consumer / Entrepreneurial</div>
+        <h3 class="project-title">Personalized Golf Tee — Easy Prints</h3>
+        <div class="project-role">Founder & Designer · Easy Prints LLC</div>
+        <p class="project-desc">Designed a personalized golf tee using order-specific 3D scan data of each customer's head — from concept to field-validated product. Founded Easy Prints LLC and built the brand HeadGolfTees.com to bring it to market.</p>
+        <ul class="project-outcomes"><li>Scan-to-print pipeline generating unique geometry per customer order</li><li>Iterated across multiple prototypes; 95A TPU selected for field durability</li><li>Slicer settings tuned through live field testing on real courses</li><li>Built brand identity, packaging, and e-commerce infrastructure</li></ul>
+        <div class="project-footer"><span class="tech-tag">Blender</span><span class="tech-tag">3D Scanning</span><span class="tech-tag">FDM / TPU</span><span class="tech-tag">Bambu Studio</span></div>
+        <div class="expand-hint">click to expand ↗</div>
+      </div>
+    </div>
+    <div class="project-card" onclick="openModal('drone')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openModal('drone')">
+      <div class="project-num">05</div>
+      <div class="project-img-gallery">
+        <img src="images/drone-render.jpg" alt="Release mechanism SolidWorks render" loading="lazy">
+        <img src="images/drone-assembled.jpg" alt="Assembled mechanism integrated on drone frame" loading="lazy">
+      </div>
+      <div class="project-body">
+        <div class="project-tag tag-robotics">Robotics / Capstone</div>
+        <h3 class="project-title">Autonomous Package Delivery Drone</h3>
+        <div class="project-role">Mechanical Designer · Auburn University</div>
+        <p class="project-desc">Led CAD for a servo-actuated spring-lock package release mechanism integrated into a fully autonomous delivery drone. Designed top-down to interface with the drone frame and validated via SolidWorks FEA for a 3.5 kg payload capacity.</p>
+        <ul class="project-outcomes"><li>Spring-lock release mechanism with servo actuation — designed and 3D printed</li><li>SolidWorks static FEA confirmed structural integrity under 3.5 kg payload</li><li>Iterated from standalone prototype to full frame-integrated design</li><li>Formal design review presentation delivered</li></ul>
+        <div class="project-footer"><span class="tech-tag">SolidWorks</span><span class="tech-tag">FEA</span><span class="tech-tag">3D Printing</span><span class="tech-tag">Mechanisms</span></div>
+        <div class="expand-hint">click to expand ↗</div>
+      </div>
+    </div>
+    <div class="project-card" onclick="openModal('robot')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openModal('robot')">
+      <div class="project-num">06</div>
+      <div class="project-img-gallery">
+        <img src="images/robot-render.jpg" alt="Full robot render with orange moon-rover cover" loading="lazy">
+        <img src="images/robot-launch.jpg" alt="Spring-loaded launch mechanism — exploded view" loading="lazy">
+      </div>
+      <div class="project-body">
+        <div class="project-tag tag-robotics">Robotics / Competition</div>
+        <h3 class="project-title">Golf Ball Launching Robot</h3>
+        <div class="project-role">Mechanical Designer · Auburn University</div>
+        <p class="project-desc">Designed and 3D printed the full mechanical system for a competitive mobile robot — tank-tracked chassis, servo-driven ball scoop, and a spring-loaded launch mechanism with servo-controlled power levels. Motion Study simulation validated ball acquisition before printing.</p>
+        <ul class="project-outcomes"><li>Achieved 1st place in Auburn University competition</li><li>SolidWorks Motion Study used to simulate and validate ball acquisition sequence</li><li>Spring-powered launcher with adjustable servo-locked power levels</li><li>All non-purchased components designed and 3D printed in-house</li></ul>
+        <div class="project-footer"><span class="tech-tag">SolidWorks</span><span class="tech-tag">Motion Study</span><span class="tech-tag">3D Printing</span><span class="tech-tag">Mechanisms</span></div>
+        <div class="expand-hint">click to expand ↗</div>
+      </div>
+    </div>
+    <div class="project-card" onclick="openModal('personal')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openModal('personal')">
+      <div class="project-num">07</div>
+      <div class="project-img-gallery">
+        <img src="images/bookmark-space.jpg" alt="HueForge space scene bookmark" loading="lazy">
+        <img src="images/bookmark-mars.jpg" alt="HueForge Mars scene bookmark" loading="lazy">
+      </div>
+      <div class="project-body">
+        <div class="project-tag tag-personal">Personal / Open Source</div>
+        <h3 class="project-title">Personal Designs & Open Source</h3>
+        <div class="project-role">Personal Projects · Published on Thingiverse & MakerWorld</div>
+        <p class="project-desc">A collection of personal designs built for real problems and published for community use — from multi-filament HueForge art prints to functional everyday parts.</p>
+        <ul class="project-outcomes">
+          <li>HueForge bookmarks — multi-filament art prints shared with the maker community</li>
+          <li>FPV drone camera mount — reverse-engineered drone head, integrated GoPro mount</li>
+          <li>Wooden handrail endcap — functional replacement part designed from scratch</li>
+          <li>All designs published on Thingiverse & MakerWorld for community use</li>
+        </ul>
+        <div class="project-footer">
+          <span class="tech-tag">SolidWorks</span><span class="tech-tag">FDM / 3D Printing</span><span class="tech-tag">Bambu Studio</span><span class="tech-tag">Thingiverse</span>
+        </div>
+        <div class="expand-hint">click to expand ↗</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="background:var(--surface)">
+  <div class="section-label">04 / Contact</div>
+  <div class="section-title">Let's Work<br>Together.</div>
+  <div class="contact-inner">
+    <p>I'm open to full-time mechanical engineering roles in product development, medical devices, or advanced manufacturing. If you're building something interesting, I'd love to hear about it.</p>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:brandonraetz0@gmail.com"><span>EMAIL</span> brandonraetz0@gmail.com</a>
+      <a class="contact-link" href="https://linkedin.com/in/brandon-raetz"><span>LINKEDIN</span> brandon-raetz</a>
+      <a class="contact-link" href="tel:6155945673"><span>PHONE</span> 615-594-5673</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Brandon Raetz</p>
+  <p>Mechanical Engineer · Auburn, AL</p>
+</footer>
+
+
+  <div class="modal-overlay" id="modal-orthotic" onclick="closeModal(event,'orthotic')">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModalById('orthotic')">&times;</button>
+      <div class="modal-left">
+        <div class="modal-gallery" id="gallery-orthotic">
+      <div class="modal-slide active"><img src="images/orthotic-1.jpg" alt="Custom dual-material foot orthotic — printed shell with foam liner"></div>
+<div class="modal-slide"><img src="images/orthotic-2.jpg" alt="Parametric insole catalog — range of sizes and arch profiles"></div>
+<div class="modal-slide"><video controls preload="metadata" poster="images/orthotic-1.jpg"><source src="images/orthotic-addon-demo.mp4" type="video/mp4"></video><div class="slide-caption">Blender add-on — orthotic design tool demo</div></div>
+<div class="modal-slide"><img src="images/orthotic-3.jpg" alt="Scan-driven orthotic in SolidWorks"></div>
+
+      <button class="modal-prev" onclick="changeSlide('orthotic',-1)">&#8249;</button>
+      <button class="modal-next" onclick="changeSlide('orthotic',1)">&#8250;</button>
+      <div class="modal-dots"><button class="modal-dot active" onclick="goSlide('orthotic',0)"></button>
+<button class="modal-dot" onclick="goSlide('orthotic',1)"></button>
+<button class="modal-dot" onclick="goSlide('orthotic',2)"></button>
+<button class="modal-dot" onclick="goSlide('orthotic',3)"></button>
+</div>
+    </div>
+      </div>
+      <div class="modal-right">
+        <div class="project-tag tag-medical" style="margin-bottom:.75rem">Medical Device</div>
+        <h2 class="modal-title">Custom Foot Orthotic Design Tool</h2>
+        <div class="modal-role">Product Development Engineer · XO Armor Technologies</div>
+        <p class="modal-desc">Built the full orthotic development pipeline from the ground up — starting with a parametric catalog of 500+ premade insoles, then developing a fully custom scan-driven orthotic in direct collaboration with a clinician. The final product is a dual-material orthotic with a rigid shell and integrated foam liner, refined across 200+ clinical iterations.</p>
+        <ul class="project-outcomes"><li>Parametric insole catalog: 500+ variations across rigid &amp; foam materials, W4–M18, low/medium/high arch, varying heel cup depths</li><li>Custom orthotic pipeline built from scratch with a clinician, iterating continuously on fit, comfort, and durability</li><li>Dual-material FDM: rigid structural shell with integrated foam liner zone</li><li>200+ orthotics produced during clinical development — patients called them "the best orthotics they've ever had"</li><li>Clinician: "These are the best 3D printed orthotics on the market"</li><li>Built a custom Blender Python add-on to improve internal processing speed, enable rapid design iteration, and produce validated proof-of-concept workflows — bridging engineering and software by handing off tested open-source implementations for integration into the proprietary software ecosystem</li><li>Authored design history documentation and test protocols for V&amp;V</li></ul>
+        <div class="project-footer"><span class="tech-tag">SolidWorks</span><span class="tech-tag">FDM / TPU + Foam</span><span class="tech-tag">Parametric CAD</span><span class="tech-tag">Dual-Material FDM</span><span class="tech-tag">Python / Blender</span><span class="tech-tag">Clinical V&amp;V</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-overlay" id="modal-sbir" onclick="closeModal(event,'sbir')">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModalById('sbir')">&times;</button>
+      <div class="modal-left">
+        <div class="modal-gallery" id="gallery-sbir">
+          <div class="modal-slide active"><img src="images/sbir-tourniquet.jpg" alt="Fully FDM-printed tourniquet — zero hardware, all functional geometry"></div>
+        </div>
+      </div>
+      <div class="modal-right">
+        <div class="project-tag tag-defense" style="margin-bottom:.75rem">Defense / SBIR</div>
+        <h2 class="modal-title">Phase II SBIR Military Device Library</h2>
+        <div class="modal-role">CAD Engineering Lead · XO Armor Technologies</div>
+        <p class="modal-desc">Generated a library of 10,000+ unique parametric STL files for a Phase II military logistics SBIR grant — enabling rapid point-of-care production of hardware, medical, protective, and tactical devices. Highlights include a fully FDM-printed tourniquet with zero hardware components.</p>
+        <ul class="project-outcomes"><li>10,000+ unique STL files generated programmatically via parametric CAD</li><li>Fully FDM-printed tourniquet — zero hardware, all functional geometry</li><li>Incorporated dimensional tolerancing for fit across variable manufacturing conditions</li><li>Covered hardware, medical, protective, and tactical device categories</li></ul>
+        <div class="project-footer"><span class="tech-tag">SolidWorks</span><span class="tech-tag">Python</span><span class="tech-tag">Parametric CAD</span><span class="tech-tag">FDM</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-overlay" id="modal-helmet" onclick="closeModal(event,'helmet')">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModalById('helmet')">&times;</button>
+      <div class="modal-left">
+        <div class="modal-gallery" id="gallery-helmet">
+      <div class="modal-slide active"><img src="images/helmet-players.jpg" alt="College and NFL players wearing the helmet ear hole cover"></div>
+      <div class="modal-slide"><img src="images/helmet-titans.jpg" alt="Ear hole covers installed on Tennessee Titans helmet during sales demo"></div>
+      <button class="modal-prev" onclick="changeSlide('helmet',-1)">&#8249;</button>
+      <button class="modal-next" onclick="changeSlide('helmet',1)">&#8250;</button>
+      <div class="modal-dots">
+        <button class="modal-dot active" onclick="goSlide('helmet',0)"></button>
+        <button class="modal-dot" onclick="goSlide('helmet',1)"></button>
+      </div>
+
+      
+    </div>
+      </div>
+      <div class="modal-right">
+        <div class="project-tag tag-consumer" style="margin-bottom:.75rem">Consumer Product</div>
+        <h2 class="modal-title">Football Helmet Ear Hole Cover</h2>
+        <div class="modal-role">CAD Engineering Lead · XO Armor Technologies</div>
+        <p class="modal-desc">Designed a retrofit helmet accessory to improve Coach-to-Player (C2P) communication by optimizing acoustic pathways in standard football helmets. Taken from initial concept through iterative development to widespread adoption across NFL and collegiate programs.</p>
+        <ul class="project-outcomes"><li>Adopted by 50+ collegiate and professional football teams including NFL clients</li><li>Generated 100+ inbound sales leads organically</li><li>Iterated design for fit compatibility across multiple helmet manufacturers</li><li>Deployed at the highest levels of collegiate and professional football</li></ul>
+        <div class="project-footer"><span class="tech-tag">SolidWorks</span><span class="tech-tag">3D Printing</span><span class="tech-tag">Product Design</span></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal-overlay" id="modal-easyprintss" onclick="closeModal(event,'easyprintss')">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModalById('easyprintss')">&times;</button>
+      <div class="modal-left">
+        <div class="modal-gallery" id="gallery-easyprintss">
+      <div class="modal-slide active"><img src="images/tee-field.jpg" alt="Custom head golf tee in the field with Callaway ball"></div>
+<div class="modal-slide"><img src="images/tee-prototypes.jpg" alt="Multiple prototype iterations across materials"></div>
+<div class="modal-slide"><img src="images/tee-printing.jpg" alt="Tee mid-print on Bambu Lab printer"></div>
+
+      <button class="modal-prev" onclick="changeSlide('easyprintss',-1)">&#8249;</button>
+      <button class="modal-next" onclick="changeSlide('easyprintss',1)">&#8250;</button>
+      <div class="modal-dots"><button class="modal-dot active" onclick="goSlide('easyprintss',0)"></button>
+<button class="modal-dot" onclick="goSlide('easyprintss',1)"></button>
+<button class="modal-dot" onclick="goSlide('easyprintss',2)"></button>
+</div>
+    </div>
+      </div>
+      <div class="modal-right">
+        <div class="project-tag tag-consumer" style="margin-bottom:.75rem">Consumer / Entrepreneurial</div>
+        <h2 class="modal-title">Personalized Golf Tee — Easy Prints</h2>
+        <div class="modal-role">Founder & Designer · Easy Prints LLC</div>
+        <p class="modal-desc">Designed a personalized golf tee using order-specific 3D scan data of each customer's head — from concept to field-validated product. Founded Easy Prints LLC and built the brand HeadGolfTees.com to bring it to market.</p>
+        <ul class="project-outcomes"><li>Scan-to-print pipeline generating unique geometry per customer order</li><li>Iterated across multiple prototypes; 95A TPU selected for field durability</li><li>Slicer settings tuned through live field testing on real courses</li><li>Built brand identity, packaging, and e-commerce infrastructure</li></ul>
+        <div class="project-footer"><span class="tech-tag">Blender</span><span class="tech-tag">3D Scanning</span><span class="tech-tag">FDM / TPU</span><span class="tech-tag">Bambu Studio</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-overlay" id="modal-drone" onclick="closeModal(event,'drone')">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModalById('drone')">&times;</button>
+      <div class="modal-left">
+        <div class="modal-gallery" id="gallery-drone">
+      <div class="modal-slide active"><img src="images/drone-render.jpg" alt="Release mechanism SolidWorks render"></div>
+<div class="modal-slide"><img src="images/drone-assembled.jpg" alt="Assembled mechanism integrated on drone frame"></div>
+<div class="modal-slide"><img src="images/drone-detail.jpg" alt="Release mechanism detail — servo and locking arm"></div>
+<div class="modal-slide"><img src="images/drone-fea.jpg" alt="SolidWorks FEA — static load analysis on release arm"></div>
+
+      <button class="modal-prev" onclick="changeSlide('drone',-1)">&#8249;</button>
+      <button class="modal-next" onclick="changeSlide('drone',1)">&#8250;</button>
+      <div class="modal-dots"><button class="modal-dot active" onclick="goSlide('drone',0)"></button>
+<button class="modal-dot" onclick="goSlide('drone',1)"></button>
+<button class="modal-dot" onclick="goSlide('drone',2)"></button>
+<button class="modal-dot" onclick="goSlide('drone',3)"></button>
+</div>
+    </div>
+      </div>
+      <div class="modal-right">
+        <div class="project-tag tag-robotics" style="margin-bottom:.75rem">Robotics / Capstone</div>
+        <h2 class="modal-title">Autonomous Package Delivery Drone</h2>
+        <div class="modal-role">Mechanical Designer · Auburn University</div>
+        <p class="modal-desc">Led CAD for a servo-actuated spring-lock package release mechanism integrated into a fully autonomous delivery drone. Designed top-down to interface with the drone frame and validated via SolidWorks FEA for a 3.5 kg payload capacity.</p>
+        <ul class="project-outcomes"><li>Spring-lock release mechanism with servo actuation — designed and 3D printed</li><li>SolidWorks static FEA confirmed structural integrity under 3.5 kg payload</li><li>Iterated from standalone prototype to full frame-integrated design</li><li>Formal design review presentation delivered</li></ul>
+        <div class="project-footer"><span class="tech-tag">SolidWorks</span><span class="tech-tag">FEA</span><span class="tech-tag">3D Printing</span><span class="tech-tag">Mechanisms</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-overlay" id="modal-robot" onclick="closeModal(event,'robot')">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModalById('robot')">&times;</button>
+      <div class="modal-left">
+        <div class="modal-gallery" id="gallery-robot">
+      <div class="modal-slide active"><img src="images/robot-render.jpg" alt="Full robot render with orange moon-rover cover"></div>
+<div class="modal-slide"><img src="images/robot-launch.jpg" alt="Spring-loaded launch mechanism — exploded view"></div>
+<div class="modal-slide"><img src="images/robot-scoop.jpg" alt="Ball acquisition scoop with servo motor"></div>
+<div class="modal-slide"><img src="images/robot-frame.jpg" alt="Internal frame and actuator housing"></div>
+
+      <button class="modal-prev" onclick="changeSlide('robot',-1)">&#8249;</button>
+      <button class="modal-next" onclick="changeSlide('robot',1)">&#8250;</button>
+      <div class="modal-dots"><button class="modal-dot active" onclick="goSlide('robot',0)"></button>
+<button class="modal-dot" onclick="goSlide('robot',1)"></button>
+<button class="modal-dot" onclick="goSlide('robot',2)"></button>
+<button class="modal-dot" onclick="goSlide('robot',3)"></button>
+</div>
+    </div>
+      </div>
+      <div class="modal-right">
+        <div class="project-tag tag-robotics" style="margin-bottom:.75rem">Robotics / Competition</div>
+        <h2 class="modal-title">Golf Ball Launching Robot</h2>
+        <div class="modal-role">Mechanical Designer · Auburn University</div>
+        <p class="modal-desc">Designed and 3D printed the full mechanical system for a competitive mobile robot — tank-tracked chassis, servo-driven ball scoop, and a spring-loaded launch mechanism with servo-controlled power levels. Motion Study simulation validated ball acquisition before printing.</p>
+        <ul class="project-outcomes"><li>Achieved 1st place in Auburn University competition</li><li>SolidWorks Motion Study used to simulate and validate ball acquisition sequence</li><li>Spring-powered launcher with adjustable servo-locked power levels</li><li>All non-purchased components designed and 3D printed in-house</li></ul>
+        <div class="project-footer"><span class="tech-tag">SolidWorks</span><span class="tech-tag">Motion Study</span><span class="tech-tag">3D Printing</span><span class="tech-tag">Mechanisms</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-overlay" id="modal-personal" onclick="closeModal(event,'personal')">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModalById('personal')">&times;</button>
+      <div class="modal-left">
+        <div class="modal-gallery" id="gallery-personal">
+          <div class="modal-slide active"><img src="images/bookmark-space.jpg" alt="HueForge space scene bookmark"></div>
+          <div class="modal-slide"><img src="images/bookmark-mars.jpg" alt="HueForge Mars scene bookmark"></div>
+          <div class="modal-slide"><img src="images/drone-mount-installed.jpg" alt="FPV drone with custom camera mount installed"></div>
+          <div class="modal-slide"><img src="images/drone-mount-print.jpg" alt="3D-printed camera mount — physical print"></div>
+          <button class="modal-prev" onclick="changeSlide('personal',-1)">&#8249;</button>
+          <button class="modal-next" onclick="changeSlide('personal',1)">&#8250;</button>
+          <div class="modal-dots">
+            <button class="modal-dot active" onclick="goSlide('personal',0)"></button>
+            <button class="modal-dot" onclick="goSlide('personal',1)"></button>
+            <button class="modal-dot" onclick="goSlide('personal',2)"></button>
+            <button class="modal-dot" onclick="goSlide('personal',3)"></button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-right">
+        <div class="project-tag tag-personal" style="margin-bottom:.75rem">Personal / Open Source</div>
+        <h2 class="modal-title">Personal Designs & Open Source</h2>
+        <div class="modal-role">Personal Projects · Published on Thingiverse & MakerWorld</div>
+        <p class="modal-desc">A collection of personal designs built to solve real problems and shared publicly — evidence of someone who's always making things, for themselves and for others.</p>
+        <ul class="project-outcomes">
+          <li>HueForge bookmarks — multi-filament art prints created for fun and shared with the maker community</li>
+          <li>FPV drone camera mount — reverse-engineered drone head geometry from scratch, integrated GoPro mount attachment point, published on Thingiverse</li>
+          <li>Wooden handrail endcap — functional replacement part designed and printed when no commercial option was available</li>
+          <li>Ongoing habit of designing, printing, and publishing for others to use</li>
+        </ul>
+        <div class="project-footer" style="margin-top:1rem">
+          <span class="tech-tag">SolidWorks</span><span class="tech-tag">FDM / 3D Printing</span><span class="tech-tag">Bambu Studio</span><span class="tech-tag">Thingiverse</span>
+          <a href="https://www.thingiverse.com/thing:5881421" target="_blank" rel="noopener"
+             style="display:inline-flex;align-items:center;gap:.4rem;font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);border:1px solid rgba(200,245,99,.3);padding:.2rem .6rem;border-radius:2px;text-decoration:none;background:rgba(200,245,99,.05);margin-top:.25rem;transition:all .2s"
+             onclick="event.stopPropagation()">↗ View on Thingiverse</a>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div>
+      <div class="modal-right">
+        <div class="project-tag tag-personal" style="margin-bottom:.75rem">Personal / Hobby</div>
+        <h2 class="modal-title">FPV Drone Camera Mount</h2>
+        <div class="modal-role">Personal Project</div>
+        <p class="modal-desc">Remodeled the head of an FPV drone from scratch to integrate a high-quality camera mount for cinematic shots. Designed to precise fit tolerances, 3D printed, and uploaded to Thingiverse for community use.</p>
+        <ul class="project-outcomes"><li>Reverse-engineered existing drone head geometry from scratch in SolidWorks</li><li>Designed integrated camera mount attachment point</li><li>Published to Thingiverse for open-source community use</li></ul>
+        <div class="project-footer"><span class="tech-tag">SolidWorks</span><span class="tech-tag">3D Printing</span><span class="tech-tag">Reverse Engineering</span></div>
+      </div>
+    </div>
+  </div>
+
+<script>
+// Modal state
+const state = {};
+
+function openModal(id) {
+  const el = document.getElementById('modal-' + id);
+  if (!el) return;
+  el.classList.add('open');
+  document.body.classList.add('modal-open');
+  if (!state[id]) state[id] = 0;
+}
+
+function pauseSlideVideo(slide) {
+  if (!slide) return;
+  const v = slide.querySelector('video');
+  if (v) v.pause();
+}
+
+function closeModalById(id) {
+  const el = document.getElementById('modal-' + id);
+  if (el) {
+    el.classList.remove('open');
+    el.querySelectorAll('video').forEach(function(v){ v.pause(); });
+  }
+  document.body.classList.remove('modal-open');
+}
+
+function closeModal(e, id) {
+  if (e.target === e.currentTarget) closeModalById(id);
+}
+
+function changeSlide(id, dir) {
+  const gallery = document.getElementById('gallery-' + id);
+  if (!gallery) return;
+  const slides = gallery.querySelectorAll('.modal-slide');
+  const dots = gallery.querySelectorAll('.modal-dot');
+  if (!slides.length) return;
+  let cur = state[id] || 0;
+  pauseSlideVideo(slides[cur]);
+  slides[cur].classList.remove('active');
+  if (dots[cur]) dots[cur].classList.remove('active');
+  cur = (cur + dir + slides.length) % slides.length;
+  state[id] = cur;
+  slides[cur].classList.add('active');
+  if (dots[cur]) dots[cur].classList.add('active');
+}
+
+function goSlide(id, idx) {
+  const gallery = document.getElementById('gallery-' + id);
+  if (!gallery) return;
+  const slides = gallery.querySelectorAll('.modal-slide');
+  const dots = gallery.querySelectorAll('.modal-dot');
+  let cur = state[id] || 0;
+  pauseSlideVideo(slides[cur]);
+  slides[cur].classList.remove('active');
+  if (dots[cur]) dots[cur].classList.remove('active');
+  state[id] = idx;
+  slides[idx].classList.add('active');
+  if (dots[idx]) dots[idx].classList.add('active');
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', function(e) {
+  const open = document.querySelector('.modal-overlay.open');
+  if (!open) return;
+  const id = open.id.replace('modal-', '');
+  if (e.key === 'Escape') closeModalById(id);
+  if (e.key === 'ArrowRight') changeSlide(id, 1);
+  if (e.key === 'ArrowLeft') changeSlide(id, -1);
+});
+</script>
+</body>
+</html>
