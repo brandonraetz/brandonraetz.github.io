@@ -403,7 +403,8 @@ body.modal-open{overflow:hidden}
       <button class="modal-close" onclick="closeModalById('catalogue')">&times;</button>
       <div class="modal-left">
         <div class="modal-gallery" id="gallery-catalogue">
-          <div class="modal-slide active"><video controls preload="metadata" poster="images/catalogue-orthotics.jpg"><source src="images/heat-mold-demo.mp4" type="video/mp4"></video><div class="slide-caption">Flat-sheet heat-moldable device — forming demo</div></div>
+          <div class="modal-slide active"><video controls preload="metadata" poster="images/catalogue-devices.jpg"><source src="images/catalogue-overview-demo.mp4" type="video/mp4"></video><div class="slide-caption">Full catalogue walkthrough — breadth of premade device families</div></div>
+          <div class="modal-slide"><video controls preload="metadata" poster="images/catalogue-orthotics.jpg"><source src="images/heat-mold-demo.mp4" type="video/mp4"></video><div class="slide-caption">Flat-sheet heat-moldable device — forming demo</div></div>
           <div class="modal-slide"><img src="images/catalogue-orthotics.jpg" alt="Premade orthotic line — printed variants across sizing and arch height"></div>
           <div class="modal-slide"><img src="images/catalogue-devices.jpg" alt="Premade device catalogue — variants across medical and athletic categories"></div>
           <button class="modal-prev" onclick="changeSlide('catalogue',-1)">&#8249;</button>
@@ -412,6 +413,7 @@ body.modal-open{overflow:hidden}
             <button class="modal-dot active" onclick="goSlide('catalogue',0)"></button>
             <button class="modal-dot" onclick="goSlide('catalogue',1)"></button>
             <button class="modal-dot" onclick="goSlide('catalogue',2)"></button>
+            <button class="modal-dot" onclick="goSlide('catalogue',3)"></button>
           </div>
         </div>
       </div>
@@ -430,7 +432,18 @@ body.modal-open{overflow:hidden}
       <button class="modal-close" onclick="closeModalById('sbir')">&times;</button>
       <div class="modal-left">
         <div class="modal-gallery" id="gallery-sbir">
-          <div class="modal-slide active"><img src="images/sbir-tourniquet.jpg" alt="Fully FDM-printed tourniquet — zero hardware, all functional geometry"></div>
+          <div class="modal-slide active"><video controls preload="metadata" poster="images/sbir-tourniquet.jpg"><source src="images/sbir-tourniquet-demo.mp4" type="video/mp4"></video><div class="slide-caption">FDM-printed tourniquet — functional demo</div></div>
+          <div class="modal-slide"><img src="images/sbir-tourniquet.jpg" alt="Fully FDM-printed tourniquet — zero hardware, all functional geometry"></div>
+          <div class="modal-slide"><img src="images/sbir-1.jpg" alt="SBIR military device library — printed component"></div>
+          <div class="modal-slide"><img src="images/sbir-2.jpg" alt="SBIR military device library — printed component"></div>
+          <button class="modal-prev" onclick="changeSlide('sbir',-1)">&#8249;</button>
+          <button class="modal-next" onclick="changeSlide('sbir',1)">&#8250;</button>
+          <div class="modal-dots">
+            <button class="modal-dot active" onclick="goSlide('sbir',0)"></button>
+            <button class="modal-dot" onclick="goSlide('sbir',1)"></button>
+            <button class="modal-dot" onclick="goSlide('sbir',2)"></button>
+            <button class="modal-dot" onclick="goSlide('sbir',3)"></button>
+          </div>
         </div>
       </div>
       <div class="modal-right">
@@ -477,6 +490,7 @@ body.modal-open{overflow:hidden}
       <div class="modal-left">
         <div class="modal-gallery" id="gallery-easyprintss">
       <div class="modal-slide active"><img src="images/tee-field.jpg" alt="Custom head golf tee in the field with Callaway ball"></div>
+<div class="modal-slide"><video controls preload="metadata" poster="images/tee-field.jpg"><source src="images/tee-demo.mp4" type="video/mp4"></video><div class="slide-caption">Custom head tee — scan-to-print process</div></div>
 <div class="modal-slide"><img src="images/tee-prototypes.jpg" alt="Multiple prototype iterations across materials"></div>
 <div class="modal-slide"><img src="images/tee-printing.jpg" alt="Tee mid-print on Bambu Lab printer"></div>
 
@@ -485,6 +499,7 @@ body.modal-open{overflow:hidden}
       <div class="modal-dots"><button class="modal-dot active" onclick="goSlide('easyprintss',0)"></button>
 <button class="modal-dot" onclick="goSlide('easyprintss',1)"></button>
 <button class="modal-dot" onclick="goSlide('easyprintss',2)"></button>
+<button class="modal-dot" onclick="goSlide('easyprintss',3)"></button>
 </div>
     </div>
       </div>
@@ -561,10 +576,12 @@ body.modal-open{overflow:hidden}
       <button class="modal-close" onclick="closeModalById('personal')">&times;</button>
       <div class="modal-left">
         <div class="modal-gallery" id="gallery-personal">
-          <div class="modal-slide active"><img src="images/bookmark-space.jpg" alt="HueForge space scene bookmark"></div>
+          <div class="modal-slide active"><img src="images/personal-1.jpg" alt="Personal 3D-printed design"></div>
+          <div class="modal-slide"><img src="images/bookmark-space.jpg" alt="HueForge space scene bookmark"></div>
           <div class="modal-slide"><img src="images/bookmark-mars.jpg" alt="HueForge Mars scene bookmark"></div>
-          <div class="modal-slide"><img src="images/drone-mount-installed.jpg" alt="FPV drone with custom camera mount installed"></div>
           <div class="modal-slide"><img src="images/drone-mount-print.jpg" alt="3D-printed camera mount — physical print"></div>
+          <div class="modal-slide"><img src="images/personal-2.jpg" alt="Personal 3D-printed design"></div>
+          <div class="modal-slide"><img src="images/personal-3.jpg" alt="Personal 3D-printed design"></div>
           <button class="modal-prev" onclick="changeSlide('personal',-1)">&#8249;</button>
           <button class="modal-next" onclick="changeSlide('personal',1)">&#8250;</button>
           <div class="modal-dots">
@@ -572,6 +589,8 @@ body.modal-open{overflow:hidden}
             <button class="modal-dot" onclick="goSlide('personal',1)"></button>
             <button class="modal-dot" onclick="goSlide('personal',2)"></button>
             <button class="modal-dot" onclick="goSlide('personal',3)"></button>
+            <button class="modal-dot" onclick="goSlide('personal',4)"></button>
+            <button class="modal-dot" onclick="goSlide('personal',5)"></button>
           </div>
         </div>
       </div>
