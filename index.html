@@ -228,16 +228,16 @@ body.modal-open{overflow:hidden}
     <div class="project-card" onclick="openModal('catalogue')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openModal('catalogue')">
       <div class="project-num">02</div>
       <div class="project-img-gallery">
-        <img src="images/catalogue-devices.jpg" alt="Grid of premade printable device variants across medical and athletic categories" loading="lazy">
-        <img src="images/catalogue-insoles.jpg" alt="Premade insole line — sizing, arch height, and heel cup depth variants" loading="lazy">
+        <img src="images/catalogue-orthotics.jpg" alt="Premade orthotic line — printed variants across sizing and arch height" loading="lazy">
+        <img src="images/catalogue-devices.jpg" alt="Premade device catalogue — variants across medical and athletic categories" loading="lazy">
       </div>
       <div class="project-body">
         <div class="project-tag tag-medical">Medical Device</div>
         <h3 class="project-title">Premade Medical &amp; Athletic Device Catalogue</h3>
         <div class="project-role">Product Development Engineer · XO Armor Technologies</div>
         <p class="project-desc">Developed automated workflows to generate and maintain a 5,000+ variant catalog of premade 3D-printable medical and athletic devices — built on a structured database enabling automated batch updates to customer-facing software.</p>
-        <ul class="project-outcomes"><li>5,000+ 3D-printable device variants generated through automated parametric workflows</li><li>Structured database architecture enabling automated batch updates to the customer-facing catalog</li><li>Includes the 500+ variant premade insole line as a subset of the broader catalog</li><li>Covers a wide range of medical and athletic device categories beyond custom, patient-specific work</li></ul>
-        <div class="project-footer"><span class="tech-tag">Python</span><span class="tech-tag">Parametric CAD</span><span class="tech-tag">Directus</span><span class="tech-tag">Database Design</span><span class="tech-tag">FDM</span></div>
+        <ul class="project-outcomes"><li>5,000+ 3D-printable device variants generated through automated parametric workflows</li><li>Structured database architecture enabling automated batch updates to the customer-facing catalog</li><li>Includes the 500+ variant premade insole line as a subset of the broader catalog</li><li>Flat-sheet, heat-moldable device line — material, design, and process changes extended working time from ~20 seconds to ~1 minute</li><li>Covers a wide range of medical and athletic device categories beyond custom, patient-specific work</li></ul>
+        <div class="project-footer"><span class="tech-tag">Python</span><span class="tech-tag">Parametric CAD</span><span class="tech-tag">Directus</span><span class="tech-tag">Database Design</span><span class="tech-tag">FDM</span><span class="tech-tag">Thermoforming</span></div>
         <div class="expand-hint">click to expand ↗</div>
       </div>
     </div>
@@ -374,9 +374,9 @@ body.modal-open{overflow:hidden}
       <button class="modal-close" onclick="closeModalById('orthotic')">&times;</button>
       <div class="modal-left">
         <div class="modal-gallery" id="gallery-orthotic">
-      <div class="modal-slide active"><img src="images/orthotic-1.jpg" alt="Custom dual-material foot orthotic — printed shell with foam liner"></div>
+      <div class="modal-slide active"><video controls preload="metadata" poster="images/orthotic-1.jpg"><source src="images/orthotic-addon-demo.mp4" type="video/mp4"></video><div class="slide-caption">Blender add-on — orthotic design tool demo</div></div>
+<div class="modal-slide"><img src="images/orthotic-1.jpg" alt="Custom dual-material foot orthotic — printed shell with foam liner"></div>
 <div class="modal-slide"><img src="images/orthotic-2.jpg" alt="Scan-driven orthotic shell — dual-material construction detail"></div>
-<div class="modal-slide"><video controls preload="metadata" poster="images/orthotic-1.jpg"><source src="images/orthotic-addon-demo.mp4" type="video/mp4"></video><div class="slide-caption">Blender add-on — orthotic design tool demo</div></div>
 <div class="modal-slide"><img src="images/orthotic-3.jpg" alt="Scan-driven orthotic in SolidWorks"></div>
 
       <button class="modal-prev" onclick="changeSlide('orthotic',-1)">&#8249;</button>
@@ -403,9 +403,9 @@ body.modal-open{overflow:hidden}
       <button class="modal-close" onclick="closeModalById('catalogue')">&times;</button>
       <div class="modal-left">
         <div class="modal-gallery" id="gallery-catalogue">
-          <div class="modal-slide active"><img src="images/catalogue-devices.jpg" alt="Grid of premade printable device variants across medical and athletic categories"></div>
-          <div class="modal-slide"><img src="images/catalogue-insoles.jpg" alt="Premade insole line — sizing, arch height, and heel cup depth variants"></div>
-          <div class="modal-slide"><img src="images/catalogue-database.jpg" alt="Structured device database driving automated batch updates to customer-facing software"></div>
+          <div class="modal-slide active"><video controls preload="metadata" poster="images/catalogue-orthotics.jpg"><source src="images/heat-mold-demo.mp4" type="video/mp4"></video><div class="slide-caption">Flat-sheet heat-moldable device — forming demo</div></div>
+          <div class="modal-slide"><img src="images/catalogue-orthotics.jpg" alt="Premade orthotic line — printed variants across sizing and arch height"></div>
+          <div class="modal-slide"><img src="images/catalogue-devices.jpg" alt="Premade device catalogue — variants across medical and athletic categories"></div>
           <button class="modal-prev" onclick="changeSlide('catalogue',-1)">&#8249;</button>
           <button class="modal-next" onclick="changeSlide('catalogue',1)">&#8250;</button>
           <div class="modal-dots">
@@ -420,8 +420,8 @@ body.modal-open{overflow:hidden}
         <h2 class="modal-title">Premade Medical &amp; Athletic Device Catalogue</h2>
         <div class="modal-role">Product Development Engineer · XO Armor Technologies</div>
         <p class="modal-desc">Built automated parametric workflows to generate and maintain a 5,000+ variant catalog of premade, ready-to-print medical and athletic devices — a broader effort distinct from (and encompassing) the custom scan-driven orthotic tool. Paired the catalog with a structured database so updates flow automatically into the customer-facing software.</p>
-        <ul class="project-outcomes"><li>5,000+ 3D-printable device variants generated via automated parametric workflows</li><li>Structured database built and maintained to support automated batch updates to the customer-facing catalog</li><li>Premade insole line (500+ variants across sizing, arch height, and heel cup depth) sits within this broader catalog</li><li>Covers a range of medical and athletic device categories for rapid, off-the-shelf point-of-care deployment</li></ul>
-        <div class="project-footer"><span class="tech-tag">Python</span><span class="tech-tag">Parametric CAD</span><span class="tech-tag">Directus</span><span class="tech-tag">Database Design</span><span class="tech-tag">FDM</span></div>
+        <ul class="project-outcomes"><li>5,000+ 3D-printable device variants generated via automated parametric workflows</li><li>Structured database built and maintained to support automated batch updates to the customer-facing catalog</li><li>Premade insole line (500+ variants across sizing, arch height, and heel cup depth) sits within this broader catalog</li><li>Flat-sheet, heat-moldable device line developed within the catalog — drove material, design, and process changes that extended clinician working time from ~20 seconds to ~1 minute</li><li>Covers a range of medical and athletic device categories for rapid, off-the-shelf point-of-care deployment</li></ul>
+        <div class="project-footer"><span class="tech-tag">Python</span><span class="tech-tag">Parametric CAD</span><span class="tech-tag">Directus</span><span class="tech-tag">Database Design</span><span class="tech-tag">FDM</span><span class="tech-tag">Thermoforming</span></div>
       </div>
     </div>
   </div>
@@ -605,7 +605,24 @@ function openModal(id) {
   if (!el) return;
   el.classList.add('open');
   document.body.classList.add('modal-open');
-  if (!state[id]) state[id] = 0;
+  resetGallery(id);
+}
+
+// Return a gallery to its first slide and rewind any video, so modals
+// always open on the intended lead frame.
+function resetGallery(id) {
+  const gallery = document.getElementById('gallery-' + id);
+  if (!gallery) { state[id] = 0; return; }
+  const slides = gallery.querySelectorAll('.modal-slide');
+  const dots = gallery.querySelectorAll('.modal-dot');
+  if (!slides.length) { state[id] = 0; return; }
+  slides.forEach(function(s, i) {
+    s.classList.toggle('active', i === 0);
+    const v = s.querySelector('video');
+    if (v) { v.pause(); v.currentTime = 0; }
+  });
+  dots.forEach(function(d, i) { d.classList.toggle('active', i === 0); });
+  state[id] = 0;
 }
 
 function pauseSlideVideo(slide) {
