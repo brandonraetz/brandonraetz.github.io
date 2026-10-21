@@ -19,12 +19,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2.5rem;display:
 .nav-links a{color:var(--muted);font-size:13px;text-decoration:none;letter-spacing:.04em;transition:color .2s}
 .nav-links a:hover{color:var(--text)}
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:6rem 2.5rem 4rem;position:relative;overflow:hidden}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:.35}
+/* HERO VIDEO BACKGROUND */
+.hero-media{position:absolute;inset:0;background:var(--bg) url("images/hero-poster.jpg") center/cover no-repeat}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(14,15,17,.96) 0%,rgba(14,15,17,.65) 40%,rgba(14,15,17,.35) 100%),linear-gradient(to right,rgba(14,15,17,.65) 0%,rgba(14,15,17,0) 70%);pointer-events:none}
+.hero-toggle{position:absolute;right:2.5rem;bottom:4rem;z-index:2;display:inline-flex;align-items:center;gap:.4rem;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:rgba(14,15,17,.6);border:1px solid var(--border);border-radius:2px;padding:.35rem .7rem;cursor:pointer;transition:all .2s}
+.hero-toggle:hover{border-color:var(--accent);color:var(--accent)}
+@media(max-width:600px){.hero-toggle{right:1.25rem;bottom:1.25rem}}
+@media(prefers-reduced-motion:reduce){.hero-video,.hero-toggle{display:none}}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:.2;pointer-events:none}
 .hero-glow{position:absolute;top:-200px;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(200,245,99,.07) 0%,transparent 70%);pointer-events:none}
 .hero-eyebrow{font-family:'DM Mono',monospace;font-size:12px;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem;position:relative}
 .hero h1{font-family:'DM Serif Display',serif;font-size:clamp(3.5rem,8vw,7rem);line-height:1.0;font-weight:400;margin-bottom:1.5rem;position:relative}
 .hero h1 em{color:var(--accent);font-style:italic}
-.hero-sub{font-size:1.1rem;color:var(--muted);max-width:520px;margin-bottom:2.5rem;font-weight:300;position:relative}
+.hero-sub{font-size:1.1rem;color:#b4b8c2;max-width:520px;margin-bottom:2.5rem;font-weight:300;position:relative}
 .hero-links{display:flex;gap:1rem;flex-wrap:wrap;position:relative}
 .btn{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.4rem;font-size:14px;font-family:'Outfit',sans-serif;font-weight:500;border-radius:3px;text-decoration:none;transition:all .2s;letter-spacing:.02em}
 .btn-primary{background:var(--accent);color:#0e0f11;border:none;cursor:pointer}
@@ -146,6 +154,12 @@ body.modal-open{overflow:hidden}
 </nav>
 
 <section class="hero">
+  <div class="hero-media" aria-hidden="true">
+    <video class="hero-video" id="hero-video" autoplay muted loop playsinline preload="auto" poster="images/hero-poster.jpg">
+      <source src="images/hero.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-overlay"></div>
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
   <div class="hero-eyebrow">Product Development Engineer · Boston, MA</div>
@@ -156,6 +170,7 @@ body.modal-open{overflow:hidden}
     <a class="btn btn-outline" href="#contact">Get In Touch</a>
   </div>
   <div class="hero-scroll"><div class="scroll-line"></div>scroll to explore</div>
+  <button class="hero-toggle" id="hero-toggle" type="button" aria-label="Pause background video">❚❚ Pause</button>
 </section>
 
 <section id="about">
@@ -275,7 +290,7 @@ body.modal-open{overflow:hidden}
         <div class="expand-hint">click to expand ↗</div>
       </div>
     </div>
-    
+
     <div class="project-card" onclick="openModal('easyprintss')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openModal('easyprintss')">
       <div class="project-num">05</div>
       <div class="project-img" style="aspect-ratio:unset">
@@ -473,7 +488,7 @@ body.modal-open{overflow:hidden}
         <button class="modal-dot" onclick="goSlide('helmet',1)"></button>
       </div>
 
-      
+
     </div>
       </div>
       <div class="modal-right">
@@ -486,7 +501,7 @@ body.modal-open{overflow:hidden}
       </div>
     </div>
   </div>
-  
+
   <div class="modal-overlay" id="modal-easyprintss" onclick="closeModal(event,'easyprintss')">
     <div class="modal-box">
       <button class="modal-close" onclick="closeModalById('easyprintss')">&times;</button>
@@ -706,6 +721,43 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'ArrowRight') changeSlide(id, 1);
   if (e.key === 'ArrowLeft') changeSlide(id, -1);
 });
+
+// Hero background video: pause/play button, respect reduced-motion,
+// and pause while scrolled out of view to save battery and data.
+(function() {
+  const video = document.getElementById('hero-video');
+  const toggle = document.getElementById('hero-toggle');
+  if (!video || !toggle) return;
+  let userPaused = false;
+
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    video.removeAttribute('autoplay');
+    video.pause();
+    return;
+  }
+
+  function setLabel() {
+    const paused = video.paused;
+    toggle.textContent = paused ? '▶ Play' : '❚❚ Pause';
+    toggle.setAttribute('aria-label', paused ? 'Play background video' : 'Pause background video');
+  }
+
+  toggle.addEventListener('click', function() {
+    if (video.paused) { userPaused = false; video.play().catch(function(){}); }
+    else { userPaused = true; video.pause(); }
+  });
+  video.addEventListener('play', setLabel);
+  video.addEventListener('pause', setLabel);
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) { if (!userPaused) video.play().catch(function(){}); }
+        else { video.pause(); }
+      });
+    }, { threshold: 0.1 }).observe(video);
+  }
+})();
 </script>
 </body>
 </html>
